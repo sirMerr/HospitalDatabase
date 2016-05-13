@@ -10,7 +10,7 @@ package business;
  */
 public enum Type {
 
-	Patient("PATIENT"), Doctor("DOCTOR"), Admin("ADMIN");
+	Patient("Patient"), Doctor("Doctor"), Admin("Admin");
 	
 	private String type;
 	

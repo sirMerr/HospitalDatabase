@@ -11,7 +11,7 @@ public class Patient extends User {
 	
 	private String notes;
 
-	public Patient(int id, String firstname, String lastname, String email, int phone, Type type) {
+	public Patient(int id, String firstname, String lastname, String email, String phone, Type type) {
 		super(id, firstname, lastname, email, phone, Type.Patient);
 	}
 

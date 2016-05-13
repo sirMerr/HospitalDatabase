@@ -10,11 +10,11 @@ package business;
 public class User {
 
 	//global variables
-	int id, phone;
-	String firstname, lastname, email;
+	int id;
+	String firstname, lastname, email, phone;
 	Type type;
 	
-	public User(int id, String firstname, String lastname, String email, int phone, Type type) {
+	public User(int id, String firstname, String lastname, String email, String phone, Type type) {
 		this.id = id;
 		this.type = type;
 		
@@ -42,6 +42,7 @@ public class User {
 		return lastname;
 	}
 	
+	
 	public String getFullName() {
 		return firstname + " " + lastname;
 	}
@@ -50,7 +51,7 @@ public class User {
 		return email;
 	}
 	
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 	
@@ -76,7 +77,7 @@ public class User {
 		}
 	}
 	
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	
