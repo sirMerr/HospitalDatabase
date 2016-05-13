@@ -76,7 +76,7 @@ public class Database extends MainApp{
 		return apptList;
 	}
 	
-	public List<String> getAllMedications() {
+	public List<String> getMedications() {
 		List<String> list = new ArrayList<String>();
 		PreparedStatement statement = conn.prepareStatement(
 				"SELECT medication_id, name FROM medications;");
