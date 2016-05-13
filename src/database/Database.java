@@ -75,4 +75,26 @@ public class Database extends MainApp{
 		
 		return apptList;
 	}
+	
+	public List<String> getAllMedications() {
+		List<String> list = new ArrayList<String>();
+		PreparedStatement statement = conn.prepareStatement(
+				"SELECT medication_id, medication_name "
+						+ "FROM medications;");
+
+		try {
+			ResultSet rs = conn.executeStatement(statement);
+
+			while (rs.next()) {
+				list.add(rs.getInt(1) + ". " + rs.getString(2));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			System.out.println("SQLException: " + e.getMessage());
+			System.out.println("ErrorCode: " + e.getErrorCode());
+			System.out.println("Error getting medications list");
+		}
+
+		return list;
+	}
 }
