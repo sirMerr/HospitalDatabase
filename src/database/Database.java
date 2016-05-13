@@ -79,14 +79,13 @@ public class Database extends MainApp{
 	public List<String> getAllMedications() {
 		List<String> list = new ArrayList<String>();
 		PreparedStatement statement = conn.prepareStatement(
-				"SELECT medication_id, medication_name "
-						+ "FROM medications;");
+				"SELECT medication_id, name FROM medications;");
 
 		try {
 			ResultSet rs = conn.executeStatement(statement);
 
 			while (rs.next()) {
-				list.add(rs.getInt(1) + ". " + rs.getString(2));
+				list.add(rs.getInt(1) + ": " + rs.getString(2));
 			}
 			rs.close();
 		} catch (SQLException e) {
