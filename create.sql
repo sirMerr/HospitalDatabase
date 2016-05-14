@@ -18,7 +18,7 @@ CREATE TABLE cs1434872.users (
      firstname  VARCHAR(45) NOT NULL,
 	 lastname  VARCHAR(45) NOT NULL,
 	 email  VARCHAR(255) NOT NULL,
-     phone  VARCHAR(10) NOT NULL,
+     phone  VARCHAR(50) NOT NULL,
      salary  FLOAT,
      notes  VARCHAR(255),
      type  ENUM('Patient', 'Doctor', 'Admin') NOT NULL
