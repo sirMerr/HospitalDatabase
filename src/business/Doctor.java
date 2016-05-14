@@ -12,8 +12,9 @@ public class Doctor extends User {
 	//global variables
 	private Float salary;
 	
-	public Doctor(int id, String firstname, String lastname, String email, String phone, Type type) {
+	public Doctor(int id, String firstname, String lastname, String email, String phone, Float salary) {
 		super(id, firstname, lastname, email, phone, Type.Doctor);
+		setSalary(salary);
 	}
 	
 	public Float getSalary() {

@@ -11,8 +11,9 @@ public class Admin extends User {
 	
 	private Float salary;
 
-	public Admin(int id, String firstname, String lastname, String email, String phone, Type type) {
+	public Admin(int id, String firstname, String lastname, String email, String phone, Float salary) {
 		super(id, firstname, lastname, email, phone, Type.Admin);
+		setSalary(salary);
 	}
 
 	public Float getSalary() {

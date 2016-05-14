@@ -54,6 +54,15 @@ public class DatabaseConnector {
 	}
 	
 	/**
+	 * Execute string statement
+	 * 
+	 * @param statement
+	 * @return results of statement
+	 */
+	public ResultSet executeStatement(String statement) {
+		return executeStatement(prepareStatement(statement));
+	}
+	/**
 	 * Executes an update statement and closes it
 	 * 
 	 * @param preparedStatement

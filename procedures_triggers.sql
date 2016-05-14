@@ -19,7 +19,7 @@ BEGIN
 	DECLARE curr_salary FLOAT;
   DECLARE new_salary FLOAT DEFAULT curr_salary;
 
-  SELECT cs1434872.salary INTO curr_salary
+  SELECT salary INTO curr_salary
 	FROM users WHERE user_id=doctor;
 
 	SET new_salary = curr_salary + raise;
@@ -47,7 +47,7 @@ END //
 
 CREATE PROCEDURE cs1434872.get_prescriptions_procedure(IN patient INT)
 BEGIN
-	SELECT cs1434872.prescription_id, name
+	SELECT prescription_id, name
 		FROM prescriptions
 		INNER JOIN medications ON medications.medication_id=prescriptions.medication_id
 		WHERE patient_id=patient
@@ -56,7 +56,7 @@ END //
 
 CREATE PROCEDURE cs1434872.get_procedures_procedure(IN patient INT)
 BEGIN
-	SELECT cs1434872.procedures.procedure_id, procedure_name FROM procedures
+	SELECT procedures.procedure_id, procedure_name FROM procedures
 		INNER JOIN procedures_patients ON procedures.procedure_id=procedures_patients.procedure_id
 		INNER JOIN users ON patient_id=user_id
 		WHERE patient_id=patient
@@ -65,7 +65,7 @@ END //
 
 CREATE PROCEDURE cs1434872.get_invoices_procedure(IN patient INT)
 BEGIN
-	SELECT cs1434872.invoice_id, invoice_amount
+	SELECT invoice_id, invoice_amount
 		FROM invoices
         WHERE patient_id=patient
         ORDER BY invoice_id DESC;
@@ -73,8 +73,8 @@ END//
 
 CREATE PROCEDURE cs1434872.waitlist_procedure(IN patient INT)
 BEGIN
-	SELECT cs1434872.doctor_id, firstname, lastname
-		FROM family_doctors
+	SELECT doctor_id, firstname, lastname
+		FROM waitlist
 		INNER JOIN users ON user_id=doctor_id
 		WHERE patient_id=patient;
 END //
@@ -89,8 +89,7 @@ BEGIN
     DECLARE d_name VARCHAR(255);
     DECLARE m_name VARCHAR(255);
 
-    -- Get medication info
-    SELECT cs1434872.name, cost, instock INTO m_name, medication_cost, medication_instock
+    SELECT name, cost, instock INTO m_name, medication_cost, medication_instock
 		FROM medications
         WHERE medication_id=medication;
 
@@ -107,11 +106,11 @@ BEGIN
 
     INSERT INTO cs1434872.invoices VALUES (null, patient, medication_cost);
 
-    SELECT cs1434872.CONCAT(firstname, " ", lastname) INTO p_name
+    SELECT CONCAT(firstname, " ", lastname) INTO p_name
 		FROM users
         WHERE user_id=patient;
 
-	SELECT cs1434872.CONCAT(firstname, " ", lastname) INTO d_name
+	SELECT CONCAT(firstname, " ", lastname) INTO d_name
 		FROM users
         WHERE user_id=doctor;
 
@@ -126,7 +125,7 @@ BEGIN
     DECLARE d_name VARCHAR(255);
     DECLARE pr_name VARCHAR(255);
 
-    SELECT cs1434872.procedure_name, cost INTO pr_name, procedure_cost
+    SELECT procedure_name, cost INTO pr_name, procedure_cost
 		FROM procedures
         WHERE procedure_id=procedureID;
 
@@ -134,11 +133,11 @@ BEGIN
 
     INSERT INTO cs1434872.invoices VALUES (null, patient, procedure_cost);
 
-    SELECT cs1434872.CONCAT(firstname, " ", lastname) INTO p_name
+    SELECT CONCAT(firstname, " ", lastname) INTO p_name
 		FROM users
         WHERE user_id=patient;
 
-	SELECT cs1434872.CONCAT(firstname, " ", lastname) INTO d_name
+	SELECT CONCAT(firstname, " ", lastname) INTO d_name
 		FROM users
         WHERE user_id=doctor;
 
@@ -161,7 +160,7 @@ END //
 CREATE TRIGGER cs1434872.after_medication_update_trigger AFTER UPDATE ON medications FOR EACH ROW
 BEGIN
 	IF NEW.instock < 6 THEN
-		INSERT INTO  cs1434872.procedure_logs  (entry) VALUES (CONCAT("Medication ", NEW.name, " stock is ", NEW.instock));
+		INSERT INTO  cs1434872.notifications  (entry) VALUES (CONCAT("Medication ", NEW.name, " stock is ", NEW.instock));
 	END IF;
 END //
 

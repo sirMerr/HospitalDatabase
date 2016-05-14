@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS cs1434872.procedure_logs;
+DROP TABLE IF EXISTS cs1434872.notifications;
 DROP TABLE IF EXISTS cs1434872.admin_logs;
 DROP TABLE IF EXISTS cs1434872.new_user_logs;
 DROP TABLE IF EXISTS cs1434872.raise_logs;
@@ -107,7 +107,7 @@ CREATE TABLE  cs1434872.admin_logs  (
      content  VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE  cs1434872.procedure_logs  (
+CREATE TABLE  cs1434872.notifications  (
 	 notification_id  INT PRIMARY KEY AUTO_INCREMENT,
 	 date  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
      content  VARCHAR(255) NOT NULL
